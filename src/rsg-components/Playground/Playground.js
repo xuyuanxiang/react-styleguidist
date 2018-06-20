@@ -8,6 +8,12 @@ import PlaygroundRenderer from 'rsg-components/Playground/PlaygroundRenderer';
 import { EXAMPLE_TAB_CODE_EDITOR } from '../slots';
 import { DisplayModes } from '../../consts';
 
+function camelCase (tag) {
+	return tag.replace(tag.charAt(0),
+		tag.charAt(0).toUpperCase()).
+		replace(/-([a-z])/g, ($1, $2) => $2.toUpperCase());
+}
+
 export default class Playground extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
@@ -65,7 +71,9 @@ export default class Playground extends Component {
 		const { code, activeTab } = this.state;
 		const { evalInContext, index, name, settings } = this.props;
 		const { displayMode } = this.context;
-		const preview = <Preview code={code} evalInContext={evalInContext} />;
+		const sourceCode = code.replace(/.*<([\w-]+).*>?.*/g,
+			($1, $2) => $1.replace(new RegExp($2, 'g'), camelCase($2)));
+		const preview = <Preview code={`<div style="background: #f5f5f5;margin:0;padding:0">${sourceCode}</div>`} evalInContext={evalInContext} />;
 		if (settings.noeditor) {
 			return <Para>{preview}</Para>;
 		}

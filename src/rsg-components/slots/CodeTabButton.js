@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TabButton from 'rsg-components/TabButton';
 
-const CodeTabButton = props => <TabButton {...props}>View Code</TabButton>;
+const CodeTabButton = props => <TabButton {...props}>查看示例源码</TabButton>;
 
 CodeTabButton.propTypes = {
 	onClick: PropTypes.func.isRequired,

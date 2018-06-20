@@ -145,7 +145,6 @@
     "start:sections": "node bin/styleguidist.js server --config examples/sections/styleguide.config.js",
     "start:ui": "node bin/styleguidist.js server",
     "lint": "eslint . --cache --fix",
-    "precompile": "rimraf lib/",
     "compile": "babel --ignore '*.spec.js' -d lib/ src/",
     "compile:watch": "babel --ignore '*.spec.js' --watch -d lib/ src/",
     "prepublishOnly": "npm run compile",
@@ -156,7 +155,6 @@
     "test:browser:basic": "node test/browser.js examples/basic/styleguide/index.html",
     "test:browser:customised": "node test/browser.js examples/customised/styleguide/index.html",
     "test:browser:sections": "node test/browser.js examples/sections/styleguide/index.html",
-    "precommit": "lint-staged",
     "format": "prettier --write '**/*.{js,md}'",
     "postinstall": "node -e \"console.log('\\u001b[32mLove Styleguidist? Support us on the Open Collective:\\u001b[22m\\u001b[39m\\n > \\u001b[96m\\u001b[1mhttps://opencollective.com/styleguidist\\u001b[0m\\n')\" || exit 0",
     "test:cypress:pre": "npm i --no-save cypress wait-on",
@@ -201,16 +199,5 @@
     "generator",
     "component",
     "components"
-  ],
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.md": [
-      "prettier --write",
-      "git add"
-    ]
-  }
+  ]
 }

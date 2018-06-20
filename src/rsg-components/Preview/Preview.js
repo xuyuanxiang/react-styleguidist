@@ -96,7 +96,16 @@ export default class Preview extends Component {
 		const { error } = this.state;
 		return (
 			<Fragment>
-				<div ref={ref => (this.mountNode = ref)} />
+				<div style={{
+					margin: '0 auto',
+					padding: 0,
+					border: '1px solid #dcdcdc',
+					position: 'relative',
+					width: 375,
+					height: 667,
+					background: '#dcdcdc',
+					overflow: 'auto',
+				}} ref={ref => (this.mountNode = ref)} />
 				{error && <PlaygroundError message={error} />}
 			</Fragment>
 		);

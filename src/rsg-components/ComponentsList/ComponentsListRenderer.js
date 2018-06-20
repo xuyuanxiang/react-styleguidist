@@ -48,7 +48,8 @@ export function ComponentsListRenderer({ classes, items }) {
 					key={href}
 				>
 					<Link className={cx(heading && classes.heading)} href={href}>
-						{name}
+						{name.replace(name.charAt(0), name.charAt(0).toLowerCase()).
+							replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`)}
 					</Link>
 					{content}
 				</li>

@@ -28,6 +28,8 @@ function renderType(type) {
 			return `{${renderType(type.value)}}`;
 		case 'instanceOf':
 			return type.value;
+		case 'link':
+			return <a href={type.href} {...type}>{type.text}</a>
 		default:
 			return name;
 	}
@@ -223,7 +225,8 @@ function renderUnion(prop) {
 
 function renderName(prop) {
 	const { name, tags = {} } = prop;
-	return <Name deprecated={!!tags.deprecated}>{name}</Name>;
+	return <Name deprecated={!!tags.deprecated}>{name.replace(/([A-Z])/g,
+		($1) => `-${$1.toLowerCase()}`)}</Name>;
 }
 
 function renderTypeColumn(prop) {
@@ -239,19 +242,19 @@ export function getRowKey(row) {
 
 export const columns = [
 	{
-		caption: 'Prop name',
+		caption: '属性',
 		render: renderName,
 	},
 	{
-		caption: 'Type',
+		caption: '类型',
 		render: renderTypeColumn,
 	},
 	{
-		caption: 'Default',
+		caption: '默认值',
 		render: renderDefault,
 	},
 	{
-		caption: 'Description',
+		caption: '描述',
 		render: renderDescription,
 	},
 ];

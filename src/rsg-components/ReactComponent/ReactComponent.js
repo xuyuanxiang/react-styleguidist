@@ -9,11 +9,6 @@ import ReactComponentRenderer from 'rsg-components/ReactComponent/ReactComponent
 import { DOCS_TAB_USAGE } from '../slots';
 import { DisplayModes } from '../../consts';
 
-const ExamplePlaceholder =
-	process.env.STYLEGUIDIST_ENV !== 'production'
-		? require('rsg-components/ExamplePlaceholder').default
-		: () => <div />;
-
 export default class ReactComponent extends Component {
 	static propTypes = {
 		component: PropTypes.object.isRequired,
@@ -70,14 +65,15 @@ export default class ReactComponent extends Component {
 						}}
 						depth={depth}
 					>
-						{name}
+						{name.replace(name.charAt(0), name.charAt(0).toLowerCase()).
+							replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`)}
 					</SectionHeading>
 				}
 				examples={
 					examples.length > 0 ? (
 						<Examples examples={examples} name={name} />
 					) : (
-						<ExamplePlaceholder name={name} />
+						<span/>
 					)
 				}
 				tabButtons={

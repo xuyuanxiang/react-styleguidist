@@ -41,28 +41,30 @@ export const styles = ({ space, color, fontFamily, fontSize }) => ({
 	},
 });
 
-export function TableRenderer({ classes, columns, rows, getRowKey }) {
+export function TableRenderer ({ classes, columns, rows, getRowKey }) {
 	return (
 		<table className={classes.table}>
 			<thead className={classes.tableHead}>
-				<tr>
-					{columns.map(({ caption }) => (
-						<th key={caption} className={classes.cellHeading}>
-							{caption}
-						</th>
-					))}
-				</tr>
+			<tr>
+				{columns.map(({ caption }) => (
+					<th key={caption} className={classes.cellHeading}>
+						{caption}
+					</th>
+				))}
+			</tr>
 			</thead>
 			<tbody>
-				{rows.map(row => (
-					<tr key={getRowKey(row)}>
-						{columns.map(({ render }, index) => (
-							<td key={index} className={classes.cell}>
-								{render(row)}
-							</td>
-						))}
-					</tr>
-				))}
+			{rows.map(row => (
+				<tr key={getRowKey(row)}>
+					{columns.map(({ render }, index) => (
+						<td key={index}
+								style={index === 1 ? { minWidth: 320 } : { minWidth: 160 }}
+								className={classes.cell}>
+							{render(row)}
+						</td>
+					))}
+				</tr>
+			))}
 			</tbody>
 		</table>
 	);
@@ -74,7 +76,7 @@ TableRenderer.propTypes = {
 		PropTypes.shape({
 			caption: PropTypes.string.isRequired,
 			render: PropTypes.func.isRequired,
-		})
+		}),
 	).isRequired,
 	rows: PropTypes.arrayOf(PropTypes.object).isRequired,
 	getRowKey: PropTypes.func.isRequired,

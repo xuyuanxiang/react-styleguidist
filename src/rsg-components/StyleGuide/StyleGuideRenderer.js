@@ -60,9 +60,6 @@ export function StyleGuideRenderer({ classes, title, homepageUrl, children, toc,
 		<div className={cx(classes.root, hasSidebar && classes.hasSidebar)}>
 			<main className={classes.content}>
 				{children}
-				<footer className={classes.footer}>
-					<Markdown text={`Generated with [React Styleguidist](${homepageUrl})`} />
-				</footer>
 			</main>
 			{hasSidebar && (
 				<div className={classes.sidebar}>
