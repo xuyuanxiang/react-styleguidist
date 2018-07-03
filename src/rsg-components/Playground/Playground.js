@@ -71,7 +71,7 @@ export default class Playground extends Component {
 		const { code, activeTab } = this.state;
 		const { evalInContext, index, name, settings } = this.props;
 		const { displayMode } = this.context;
-		const sourceCode = code.replace(/.*<([\w-]+).*>?.*/g,
+		const sourceCode = code.replace(/<\/?(\w+-?\w+)\s*>?/g,
 			($1, $2) => $1.replace(new RegExp($2, 'g'), camelCase($2)));
 		const preview = <Preview code={`<div style="background: #f5f5f5;margin:0;padding:0">${sourceCode}</div>`} evalInContext={evalInContext} />;
 		if (settings.noeditor) {
